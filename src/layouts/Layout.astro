@@ -41,9 +41,12 @@ const { title, description = 'Proyecto Astro 5 + React + Tailwind CSS.' } = Astr
   </head>
   <body class="flex min-h-screen flex-col">
     <slot name="before-header" />
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-600 focus:px-3 focus:py-2 focus:text-white"
+      >Saltar al contenido</a
+    >
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
       <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3" aria-label="Navegación principal">
-        <a href="/" class="text-lg font-bold tracking-tight">Jhonnathan.dev</a>
+        <a href="/" class="text-lg font-bold tracking-tight" aria-label="Inicio">Jhonnathan.dev</a>
 
         <!-- Menú desktop -->
         <ul class="hidden items-center gap-6 sm:flex">
@@ -116,7 +119,7 @@ const { title, description = 'Proyecto Astro 5 + React + Tailwind CSS.' } = Astr
       </div>
     </header>
 
-    <main class="flex-1">
+    <main id="main-content" class="flex-1" tabindex="-1">
       <slot />
     </main>
 
@@ -147,8 +150,15 @@ const { title, description = 'Proyecto Astro 5 + React + Tailwind CSS.' } = Astr
         }
 
         function toggleTheme() {
-          html.classList.toggle('dark');
-          localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+          const html = document.documentElement;
+          const dark = html.classList.contains('dark');
+          if (dark) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+          } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          }
           updateIcons();
         }
 
