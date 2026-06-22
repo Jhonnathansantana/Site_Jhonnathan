@@ -5,13 +5,6 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jhonnathan.dev',
+  site: 'https://site-jhonnathan.netlify.app',
   integrations: [react(), tailwind({ applyBaseStyles: false })],
-  vite: {
-    build: {
-      rollupOptions: {
-        external: ['/pagefind/pagefind.js'],
-      },
-    },
-  },
 });
