@@ -1,52 +1,117 @@
 ---
 import '../styles/global.css';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
 
-const title = 'Jhonnathan.dev — Desarrollador web y asesoría tecnológica';
+const title = 'Jhonnathan.dev — Blog asistido por IA sobre tecnología, ciberseguridad y gestión TI';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
 ---
 
-<Layout title={title} description="Sitio personal de Jhonnathan: desarrollo web, consultoría tecnológica e integraciones con IA.">
+<Layout title={title} description="Portal del blog de Jhonnathan: artículos sobre tecnología, ciberseguridad, gestión de TI e integraciones con IA.">
   <section class="relative overflow-hidden px-4 py-20 sm:py-28">
     <div class="mx-auto max-w-4xl text-center">
-      <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Hola, soy Jhonnathan</p>
+      <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">
+        Blog asistido por IA
+      </p>
       <h1 class="mb-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-        Construyo sitios web modernos y ayudo a equipos a aprovechar la IA.
+        Tecnología, ciberseguridad y gestión TI
       </h1>
       <p class="mx-auto mb-10 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-        Desarrollador web enfocado en performance, accesibilidad y experiencia de usuario. También asesoro en arquitectura de productos e integraciones inteligentes.
+        Soy Jhonnathan, profesional de tecnología con más de 15 años de experiencia. En este espacio comparto ideas, guías y reflexiones sobre desarrollo web, infraestructura, seguridad y liderazgo técnico.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4">
-        <Button href="/servicios" variant="primary" size="lg">Ver servicios</Button>
-        <Button href="/contacto" variant="secondary" size="lg">Hablemos</Button>
+        <Button href="/blog" variant="primary" size="lg">Ver artículos</Button>
+        <Button href="/servicios" variant="secondary" size="lg">Servicios</Button>
       </div>
     </div>
   </section>
 
   <section class="border-y border-slate-200 bg-slate-50 px-4 py-16 dark:border-slate-800 dark:bg-slate-900">
     <div class="mx-auto max-w-6xl">
-      <div class="grid gap-8 sm:grid-cols-3">
-        <div class="text-center">
-          <p class="text-3xl font-bold text-brand-600 dark:text-brand-400">+5</p>
-          <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">años de experiencia</p>
+      <div class="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Últimos artículos</h2>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Reflexiones recientes sobre tecnología y prácticas de gestión.
+          </p>
         </div>
-        <div class="text-center">
-          <p class="text-3xl font-bold text-brand-600 dark:text-brand-400">20+</p>
-          <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">proyectos entregados</p>
-        </div>
-        <div class="text-center">
-          <p class="text-3xl font-bold text-brand-600 dark:text-brand-400">100%</p>
-          <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">enfoque en resultados</p>
-        </div>
+        <Button href="/blog" variant="secondary">Explorar el blog</Button>
+      </div>
+
+      {
+        latestPosts.length === 0 ? (
+          <p class="text-slate-600 dark:text-slate-400">Próximamente.</p>
+        ) : (
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {latestPosts.map((post) => (
+              <Card
+                title={post.data.title}
+                link={{ href: `/blog/${post.id}/`, label: 'Leer artículo' }}
+                highlighted={post.data.featured}
+              >
+                <p class="line-clamp-3 text-slate-600 dark:text-slate-400">
+                  {post.data.description}
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {post.data.tags.map((tag) => (
+                    <span class="rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+                <p class="mt-4 text-xs text-slate-500 dark:text-slate-500">
+                  {post.data.pubDate.toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </p>
+              </Card>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="px-4 py-16">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-6 sm:grid-cols-2">
+        <Card
+          title="Sobre mí"
+          link={{ href: '/sobre-mi', label: 'Conocer mi trayectoria' }}
+          highlighted
+        >
+          <p class="text-slate-600 dark:text-slate-400">
+            Más de 15 años de experiencia en TI, ciberseguridad, consultoría y docencia. Conoce mi formación, roles y enfoque de trabajo.
+          </p>
+        </Card>
+
+        <Card
+          title="Servicios"
+          link={{ href: '/servicios', label: 'Ver catálogo' }}
+        >
+          <p class="text-slate-600 dark:text-slate-400">
+            Desarrollo web, consultoría tecnológica e integraciones con IA para ayudar a equipos y organizaciones a crecer.
+          </p>
+        </Card>
       </div>
     </div>
   </section>
 
   <section class="px-4 py-16">
     <div class="mx-auto max-w-4xl text-center">
-      <h2 class="mb-4 text-2xl font-semibold">¿Tienes un proyecto en mente?</h2>
-      <p class="mb-8 text-slate-600 dark:text-slate-400">Cuéntame lo que necesitas y te ayudo a definir el mejor camino.</p>
-      <Button href="/contacto" variant="primary">Escríbeme</Button>
+      <h2 class="mb-4 text-2xl font-semibold">¿Necesitas apoyo tecnológico?</h2>
+      <p class="mb-8 text-slate-600 dark:text-slate-400">
+        Cuéntame tu reto y te ayudo a definir el mejor camino.
+      </p>
+      <Button href="/contacto" variant="primary">Hablemos</Button>
     </div>
   </section>
 </Layout>
