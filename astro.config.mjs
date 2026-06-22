@@ -1,17 +1,24 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import sitemap from '@astrojs/sitemap';
+
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://site-jhonnathan.netlify.app',
-  integrations: [react(), tailwind({ applyBaseStyles: false })],
-  vite: {
-    build: {
-      rollupOptions: {
-        external: ['/pagefind/pagefind.js'],
-      },
-    },
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
   },
+  build: {
+    inlineStylesheets: 'always'
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  site: 'https://rubzip.github.io',
+  base: '/academic-portfolio-astro',
+  integrations: [sitemap()],
 });
