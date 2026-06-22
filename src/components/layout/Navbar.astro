@@ -1,36 +1,99 @@
 ---
-import { NAV_LINKS, PAGES } from "../../config";
+import { NAV_LINKS, PAGES, SITE } from "../../config";
 
 const currentPath = Astro.url.pathname;
+const visibleLinks = NAV_LINKS.filter((link) => {
+    const isHome = link.href === "/";
+    const pageKey = isHome ? "home" : link.href.split("/").filter(Boolean)[0];
+    const pageConfig = (PAGES as any)[pageKey];
+    return link.isActive !== false && pageConfig?.active !== false;
+});
 ---
 
-<nav class="navbar">
-    <ul class="nav-links">
+<nav class="navbar" aria-label="Principal">
+    <div class="navbar-inner">
+        <a href="/" class="navbar-brand lg:hidden" aria-label="Inicio">
+            <span class="font-bold text-foreground">{SITE.title}</span>
+        </a>
+        <button
+            id="nav-toggle"
+            class="nav-toggle"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label="Abrir menú"
+        >
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <ul id="nav-menu" class="nav-links" role="menubar">
         {
-            NAV_LINKS.filter((link) => {
-                const isHome = link.href === "/";
-                const pageKey = isHome
-                    ? "home"
-                    : link.href.split("/").filter(Boolean)[0];
-                const pageConfig = (PAGES as any)[pageKey];
-                return link.isActive !== false && pageConfig?.active !== false;
-            }).map((link) => (
-                <li>
+            visibleLinks.map((link) => (
+                <li role="none">
                     <a
                         href={link.href}
+                        role="menuitem"
                         class={`nav-link ${
                             currentPath === link.href ||
-                            (link.href !== "/" &&
-                                currentPath.startsWith(link.href))
+                            (link.href !== "/" && currentPath.startsWith(link.href))
                                 ? "active"
                                 : "inactive"
                         }`}
+                        aria-current={
+                            currentPath === link.href ||
+                            (link.href !== "/" && currentPath.startsWith(link.href))
+                                ? "page"
+                                : undefined
+                        }
                     >
                         {link.label}
-                        <span class="nav-link-line" />
+                        <span class="nav-link-line" aria-hidden="true" />
                     </a>
                 </li>
             ))
         }
     </ul>
 </nav>
+
+<script is:inline>
+    (function () {
+        const toggle = document.getElementById("nav-toggle");
+        const menu = document.getElementById("nav-menu");
+        if (!toggle || !menu) return;
+
+        function closeMenu() {
+            menu.classList.remove("open");
+            toggle.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Abrir menú");
+            document.body.style.overflow = "";
+        }
+
+        function openMenu() {
+            menu.classList.add("open");
+            toggle.classList.add("open");
+            toggle.setAttribute("aria-expanded", "true");
+            toggle.setAttribute("aria-label", "Cerrar menú");
+            document.body.style.overflow = "hidden";
+        }
+
+        toggle.addEventListener("click", () => {
+            if (menu.classList.contains("open")) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        menu.querySelectorAll(".nav-link").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("astro:after-swap", closeMenu);
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeMenu();
+        });
+    })();
+</script>

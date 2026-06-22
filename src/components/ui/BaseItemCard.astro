@@ -11,9 +11,10 @@ interface Props {
     extraInput?: string;
     tags?: string[];
     externalUrl?: string;
+    ctaText?: string;
 }
 
-const { title, href, description, date, authors, extraInput, tags, externalUrl } = Astro.props;
+const { title, href, description, date, authors, extraInput, tags, externalUrl, ctaText = "Ver más" } = Astro.props;
 ---
 
 <article class="card">
@@ -22,20 +23,20 @@ const { title, href, description, date, authors, extraInput, tags, externalUrl }
 
         <div class="card-meta">
             {date && (
-                <span class="flex items-center gap-1">
-                    <Icon name="Calendar" size={24} />
+                <span class="flex items-center gap-1.5">
+                    <Icon name="Calendar" size={16} />
                     <span>{date}</span>
                 </span>
             )}
             {authors && (
-                <span class="flex items-center gap-1">
-                    <Icon name="User" size={24} />
+                <span class="flex items-center gap-1.5">
+                    <Icon name="User" size={16} />
                     <span>{authors}</span>
                 </span>
             )}
             {extraInput && (
-                <span class="flex items-center gap-1">
-                    <Icon name="Institution" size={24} />
+                <span class="flex items-center gap-1.5">
+                    <Icon name="Institution" size={16} />
                     <span>{extraInput}</span>
                 </span>
             )}
@@ -43,7 +44,7 @@ const { title, href, description, date, authors, extraInput, tags, externalUrl }
 
         {
             tags && tags.length > 0 && (
-                <div class="flex gap-2 flex-wrap mb-3">
+                <div class="card-tags">
                     {tags.map((tag) => (
                         <Tag name={tag} size="sm" />
                     ))}
@@ -56,9 +57,9 @@ const { title, href, description, date, authors, extraInput, tags, externalUrl }
 
     {
         externalUrl && (
-            <div class="flex-shrink-0">
-                <a href={externalUrl} target="_blank" rel="noopener noreferrer" class="card-link">
-                    View
+            <div class="card-action">
+                <a href={externalUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                    {ctaText}
                 </a>
             </div>
         )

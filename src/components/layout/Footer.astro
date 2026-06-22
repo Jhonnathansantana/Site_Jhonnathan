@@ -4,22 +4,17 @@ import Icon from "../ui/Icon.astro";
 
 const currentYear = new Date().getFullYear();
 const showToggle = THEME_CONFIG.lightAndDark;
-const showDevTools = import.meta.env.DEV || SETTINGS.addDevToolsInProduction;
+const showDevTools = import.meta.env.DEV;
 ---
 
 <footer class="footer">
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 flex-wrap">
         <span class="body-xs">&copy; {currentYear} {SITE.author}.</span>
+        <span class="body-xs hidden sm:inline-block opacity-70">
+            Hecho con <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="link">Astro</a>.
+        </span>
     </div>
-    <div class="flex items-center gap-4">
-        <span class="body-xs hidden sm:inline-block"
-            >Built with <a
-                href="https://github.com/rubzip/academic-portfolio-astro/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="link">Academic Portfolio Astro</a
-            ></span
-        >
+    <div class="flex items-center gap-3">
         <a
             href="/rss.xml"
             aria-label="RSS Feed"
@@ -34,7 +29,7 @@ const showDevTools = import.meta.env.DEV || SETTINGS.addDevToolsInProduction;
             showToggle && (
                 <button
                     id="theme-toggle"
-                    aria-label="Toggle Dark Mode"
+                    aria-label="Cambiar tema oscuro/claro"
                     class="btn-icon"
                 >
                     <Icon name="Sun" size={16} class="hidden dark:block" />

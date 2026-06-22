@@ -1,31 +1,37 @@
 ---
-import { getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 import { PAGES } from "../config";
+import Icon from "../components/ui/Icon.astro";
 
-// Load bio content
-const bioEntry = await getEntry("bio", "bio");
-const { Content: BioContent } = bioEntry
-	? await render(bioEntry)
-	: { Content: null };
+const bioCollection = await getCollection("bio");
+const BioContent = bioCollection[0]?.rendered?.Content;
+
+const quickLinks = [
+    { label: "Servicios", href: "/services", icon: "Briefcase" },
+    { label: "Blog", href: "/posts", icon: "FileText" },
+    { label: "Proyectos", href: "/projects", icon: "Folder" },
+    { label: "CV", href: "/cv", icon: "Award" },
+];
 ---
 
 <BaseLayout title={PAGES.home.title}>
-	<div class="container-narrow">
-		{
-			(PAGES.home.title || PAGES.home.subtitle) && (
-				<header class="page-header">
-					{PAGES.home.title && (
-						<h1 class="page-title">{PAGES.home.title}</h1>
-					)}
-					{PAGES.home.subtitle && (
-						<p class="page-subtitle">{PAGES.home.subtitle}</p>
-					)}
-				</header>
-			)
-		}
-		<div class="prose">
-			{BioContent ? <BioContent /> : <p>Cargando biografía...</p>}
-		</div>
-	</div>
+    <div class="prose max-w-none">
+        {BioContent ? <BioContent /> : <p>Cargando biografía...</p>}
+    </div>
+
+    <section class="mt-8" aria-labelledby="quick-links-title">
+        <h2 id="quick-links-title" class="section-title">Enlaces destacados</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {quickLinks.map((link) => (
+                <a
+                    href={link.href}
+                    class="flex items-center gap-3 p-3 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent transition-colors"
+                >
+                    <Icon name={link.icon} size={20} />
+                    <span class="font-semibold text-sm">{link.label}</span>
+                </a>
+            ))}
+        </div>
+    </section>
 </BaseLayout>
