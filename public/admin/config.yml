@@ -1,0 +1,40 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Cambia esto en producción al dominio real de Netlify Identity
+site_url: https://jhonnathan.dev
+logo_url: https://jhonnathan.dev/favicon.svg
+
+publish_mode: editorial_workflow
+
+media_folder: "public/assets/blog"
+public_folder: "/assets/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "blog/{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Título", name: "title", widget: "string", hint: "Máx. 120 caracteres." }
+      - { label: "Descripción", name: "description", widget: "text", hint: "Máx. 240 caracteres. Aparece en tarjetas y SEO." }
+      - { label: "Fecha de publicación", name: "pubDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, default: "{{now}}" }
+      - { label: "Última actualización", name: "updatedDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: "Autor", name: "author", widget: "string", default: "Jhonnathan" }
+      - { label: "Etiquetas", name: "tags", widget: "list", allow_add: true, default: [] }
+      - { label: "Categoría", name: "category", widget: "string", required: false }
+      - { label: "Destacado", name: "featured", widget: "boolean", default: false }
+      - { label: "Borrador", name: "draft", widget: "boolean", default: false }
+      - label: "Portada"
+        name: "cover"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Imagen", name: "src", widget: "image" }
+          - { label: "Texto alternativo", name: "alt", widget: "string" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }

@@ -1,0 +1,16 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22.12.0"
+  OPENAI_MODEL = "gpt-4o-mini"
+
+# Exponer la función serverless de asistente IA
+[[functions]]
+  function = "ai-assistant"
+  path = "/.netlify/functions/ai-assistant"
+
+[dev]
+  targetPort = 4321
+  publish = "dist"
