@@ -7,4 +7,11 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://site-jhonnathan.netlify.app',
   integrations: [react(), tailwind({ applyBaseStyles: false })],
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ['/pagefind/pagefind.js'],
+      },
+    },
+  },
 });

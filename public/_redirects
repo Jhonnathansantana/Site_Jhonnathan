@@ -1,0 +1,8 @@
+# Netlify redirects for Astro static site + Decap CMS SPA admin
+
+# Ensure the Decap CMS admin SPA handles its own client-side routes.
+/admin/*  /admin/index.html  200
+
+# Optional: pretty URL fallback for any route missing a static file.
+# Astro pre-renders all pages, so this is only a safety net.
+/*        /index.html        200
