@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+import servicesData from '../data/services.json';
+
+const title = 'Servicios — Jhonnathan.dev';
+---
+
+<Layout title={title} description="Catálogo de servicios profesionales: desarrollo web, consultoría tecnológica e integraciones con IA.">
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+    <header class="mb-12 text-center">
+      <h1 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">Servicios</h1>
+      <p class="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+        Soluciones prácticas para construir productos digitales, integrar inteligencia artificial y acompañar equipos en su crecimiento técnico.
+      </p>
+    </header>
+
+    <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        servicesData.services.map((service) => (
+          <Card title={service.title} highlighted={service.id === 'desarrollo-web'}>
+            <p class="mb-4 text-slate-600 dark:text-slate-400">{service.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {service.tags.map((tag) => (
+                <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </Card>
+        ))
+      }
+    </section>
+
+    <section class="mt-16 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-10 text-center dark:border-slate-800 dark:bg-slate-900 sm:px-10">
+      <h2 class="mb-3 text-2xl font-semibold">¿Necesitas algo a medida?</h2>
+      <p class="mb-6 text-slate-600 dark:text-slate-400">Hablemos de tu proyecto y vemos cómo puedo ayudarte.</p>
+      <Button href="/contacto" variant="primary" size="lg">Contactar</Button>
+    </section>
+  </div>
+</Layout>
