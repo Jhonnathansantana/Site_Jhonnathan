@@ -1,28 +1,34 @@
 {
   "services": [
     {
-      "id": "consultoria",
-      "title": "Consultoría tecnológica",
-      "description": "Asesoría para definir arquitectura, stack y hoja de ruta de productos digitales. Enfocado en claridad, escalabilidad y entrega de valor real.",
-      "tags": ["Arquitectura", "Producto", "Estrategia"]
+      "id": "gestion-gobierno-ti",
+      "title": "Gestión y gobierno de TI",
+      "description": "Diseño e implementación de procesos ITIL, gestión de incidentes, cambios, activos y proveedores. Alineación de la tecnología con objetivos de negocio y mejora continua.",
+      "tags": ["ITIL", "Gestión de servicios", "Procesos"]
     },
     {
-      "id": "desarrollo-web",
-      "title": "Desarrollo web",
-      "description": "Sitios y aplicaciones web modernas con Astro, React y Tailwind CSS. Performance, accesibilidad y SEO como prioridades.",
-      "tags": ["Astro", "React", "Tailwind"]
+      "id": "ciberseguridad-continuidad",
+      "title": "Ciberseguridad y continuidad operacional",
+      "description": "Evaluación de riesgos, hardening, controles de seguridad, respaldo y planes de continuidad. Protejo la operación para que el negocio no se detenga.",
+      "tags": ["Seguridad", "BC/DR", "Riesgos"]
     },
     {
-      "id": "integraciones-ia",
-      "title": "Integraciones con IA",
-      "description": "Automatización de flujos, asistentes inteligentes y búsqueda semántica con modelos de lenguaje. Diseño pensado en resultados medibles.",
-      "tags": ["OpenAI", "Pagefind", "Agentes"]
+      "id": "monitoreo-devops-dashboards",
+      "title": "Monitoreo, DevOps y dashboards ejecutivos",
+      "description": "Implementación de monitoreo 24/7, pipelines de despliegue, automatización y paneles ejecutivos que traducen datos técnicos en decisiones claras.",
+      "tags": ["Monitoreo", "DevOps", "Dashboards"]
     },
     {
-      "id": "mentoria",
-      "title": "Mentoría técnica",
-      "description": "Acompañamiento personalizado para desarrolladores y equipos que quieren subir de nivel en frontend, arquitectura o flujos de trabajo.",
-      "tags": ["Crecimiento", "Frontend", "Buenas prácticas"]
+      "id": "formacion-mentoria",
+      "title": "Formación técnica y mentoría",
+      "description": "Capacitación y acompañamiento para equipos de TI en gestión de servicios, ciberseguridad, monitoreo y buenas prácticas. Aprendizaje aplicado a escenarios reales.",
+      "tags": ["Capacitación", "Mentoría", "Mejora de equipos"]
+    },
+    {
+      "id": "desarrollo-ia",
+      "title": "Desarrollo web asistido por IA",
+      "description": "Sitios, aplicaciones e integraciones modernas con Astro, React y herramientas de IA generativa. Desarrollo rápido, enfocado y orientado a resultados medibles.",
+      "tags": ["Astro", "React", "IA generativa"]
     }
   ]
 }

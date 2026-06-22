@@ -8,19 +8,19 @@ import servicesData from '../data/services.json';
 const title = 'Servicios — Jhonnathan.dev';
 ---
 
-<Layout title={title} description="Catálogo de servicios profesionales: desarrollo web, consultoría tecnológica e integraciones con IA.">
+<Layout title={title} description="Servicios profesionales de un especialista con más de 15 años de experiencia en TI: gobierno de servicios, ciberseguridad, monitoreo, formación y desarrollo web con IA.">
   <div class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
     <header class="mb-12 text-center">
       <h1 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">Servicios</h1>
       <p class="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-        Soluciones prácticas para construir productos digitales, integrar inteligencia artificial y acompañar equipos en su crecimiento técnico.
+        Más de 15 años recorriendo TI desde la operación hasta la estrategia. Ofrezco servicios prácticos en gobierno de servicios, ciberseguridad, monitoreo, formación y desarrollo web con IA.
       </p>
     </header>
 
-    <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         servicesData.services.map((service) => (
-          <Card title={service.title} highlighted={service.id === 'desarrollo-web'}>
+          <Card title={service.title} highlighted={service.id === 'desarrollo-ia'}>
             <p class="mb-4 text-slate-600 dark:text-slate-400">{service.description}</p>
             <div class="flex flex-wrap gap-2">
               {service.tags.map((tag) => (
