@@ -1,0 +1,28 @@
+{
+  "services": [
+    {
+      "id": "consultoria",
+      "title": "Consultoría tecnológica",
+      "description": "Asesoría para definir arquitectura, stack y hoja de ruta de productos digitales. Enfocado en claridad, escalabilidad y entrega de valor real.",
+      "tags": ["Arquitectura", "Producto", "Estrategia"]
+    },
+    {
+      "id": "desarrollo-web",
+      "title": "Desarrollo web",
+      "description": "Sitios y aplicaciones web modernas con Astro, React y Tailwind CSS. Performance, accesibilidad y SEO como prioridades.",
+      "tags": ["Astro", "React", "Tailwind"]
+    },
+    {
+      "id": "integraciones-ia",
+      "title": "Integraciones con IA",
+      "description": "Automatización de flujos, asistentes inteligentes y búsqueda semántica con modelos de lenguaje. Diseño pensado en resultados medibles.",
+      "tags": ["OpenAI", "Pagefind", "Agentes"]
+    },
+    {
+      "id": "mentoria",
+      "title": "Mentoría técnica",
+      "description": "Acompañamiento personalizado para desarrolladores y equipos que quieren subir de nivel en frontend, arquitectura o flujos de trabajo.",
+      "tags": ["Crecimiento", "Frontend", "Buenas prácticas"]
+    }
+  ]
+}
