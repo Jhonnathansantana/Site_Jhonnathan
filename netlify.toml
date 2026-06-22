@@ -1,26 +1,9 @@
 [build]
-  publish = "dist"
   command = "npm run build"
+  publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "22.12.0"
-  # Definidas también en Site settings > Environment variables
-  # OPENAI_API_KEY = ""
-  # OPENAI_MODEL = "gpt-4o-mini"
+  NODE_VERSION = "22"
 
 [functions]
   directory = "netlify/functions"
-
-[[redirects]]
-  from = "/admin/*"
-  to = "/admin/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[dev]
-  targetPort = 4321
-  publish = "dist"

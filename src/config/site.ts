@@ -1,20 +1,20 @@
 import type { SiteConfig, ThemeConfig, SettingsConfig, UmamiAnalyticsConfig, AnalyticsConfig } from "../types";
 
 export const SITE: SiteConfig = {
-    website: "https://shannon.github.io/academic-portfolio-astro/",
-    author: "Claude Shannon",
-    desc: "Personal academic portfolio and blog of Claude Shannon, Father of Information Theory.",
-    title: "Claude Shannon",
-    ogImage: "shannon.webp",
+    website: "https://site-jhonnathan.netlify.app/",
+    author: "Jhonnathan De Jesús Araujo Santana",
+    desc: "Portafolio académico y profesional de Jhonnathan De Jesús Araujo Santana. TI, ciberseguridad, DevOps y docencia.",
+    title: "Jhonnathan De Jesús Araujo Santana",
+    ogImage: "jhonnathan.jpg",
     postPerPage: 5,
     favicon: "/favicon.svg",
-    lang: "en",
+    lang: "es",
 };
 
 export const THEME_CONFIG: ThemeConfig = {
     lightAndDark: true,
     themeLight: "light_default",
-    themeDark: "dark_notepad",
+    themeDark: "dark_default",
 };
 
 export const SETTINGS: SettingsConfig = {

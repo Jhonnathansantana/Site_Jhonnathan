@@ -2,43 +2,43 @@ import type { PagesConfig } from "../types";
 
 export const PAGES: PagesConfig = {
     home: {
-        title: "About Me",
+        title: "Sobre mí",
         subtitle: "",
         isActive: true,
     },
     blog: {
         title: "Blog",
-        subtitle: "Thoughts on physics, philosophy, and music.",
+        subtitle: "Reflexiones sobre tecnología, ciberseguridad, gestión de TI y educación.",
         isActive: true,
     },
     publications: {
-        title: "Publications",
-        subtitle: "A collection of research papers and scientific articles.",
-        isActive: true,
+        title: "Publicaciones",
+        subtitle: "Artículos, papers y materiales académicos.",
+        isActive: false,
     },
     talks: {
-        title: "Talks & Presentations",
-        subtitle: "Public lectures, colloquia, and conference presentations.",
-        isActive: true,
+        title: "Charlas",
+        subtitle: "Presentaciones y conferencias.",
+        isActive: false,
     },
     projects: {
-        title: "Code & Projects",
-        subtitle: "Open source contributions and technological experiments.",
+        title: "Proyectos",
+        subtitle: "Experimentos, repositorios y desarrollo asistido por IA.",
         isActive: true,
     },
     teaching: {
-        title: "Teaching",
-        subtitle: "Academic courses and educational materials.",
+        title: "Docencia",
+        subtitle: "Cursos, talleres y materiales educativos.",
         isActive: true,
     },
     tags: {
-        title: "Tags",
-        subtitle: "Explore content by topic.",
+        title: "Etiquetas",
+        subtitle: "Explora contenido por tema.",
         isActive: true,
     },
     cv: {
-        title: "Curriculum Vitae",
-        subtitle: "Academic and professional history.",
+        title: "Currículum",
+        subtitle: "Trayectoria académica y profesional.",
         isActive: true,
     },
 };

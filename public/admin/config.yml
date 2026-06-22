@@ -1,0 +1,55 @@
+backend:
+  name: git-gateway
+  branch: main
+  repo: Jhonnathansantana/Site_Jhonnathan
+
+# site_url y logo_url se actualizarán cuando exista dominio real
+# site_url: https://site-jhonnathan.netlify.app
+# logo_url: https://site-jhonnathan.netlify.app/logo.svg
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: es
+
+collections:
+  - name: "posts"
+    label: "Entradas del blog"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Descripción", name: "description", widget: "text", required: false }
+      - { label: "Autor", name: "author", widget: "string", default: "Jhonnathan De Jesús Araujo Santana" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false }
+      - { label: "URL externa", name: "external_url", widget: "string", required: false }
+      - { label: "Imagen destacada", name: "image", widget: "image", required: false }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
+
+  - name: "projects"
+    label: "Proyectos"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false }
+      - { label: "URL externa", name: "external_url", widget: "string", required: false }
+      - { label: "Imagen", name: "image", widget: "image", required: false }
+      - { label: "Cuerpo", name: "body", widget: "markdown", required: false }
+
+  - name: "teaching"
+    label: "Docencia"
+    folder: "src/content/teaching"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Institución", name: "institution", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false }
+      - { label: "URL externa", name: "external_url", widget: "string", required: false }
+      - { label: "Cuerpo", name: "body", widget: "markdown", required: false }
