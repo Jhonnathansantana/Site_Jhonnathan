@@ -22,6 +22,7 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@netlify/functions": "^3.0.4",
     "@tailwindcss/typography": "^0.5.20",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.4",

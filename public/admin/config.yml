@@ -2,9 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
-# Cambia esto en producción al dominio real de Netlify Identity
-site_url: https://jhonnathan.dev
-logo_url: https://jhonnathan.dev/favicon.svg
+# Descomenta y actualiza cuando tengas dominio real
+# site_url: https://site-jhonnathan.netlify.app
+# logo_url: https://site-jhonnathan.netlify.app/favicon.svg
 
 publish_mode: editorial_workflow
 
