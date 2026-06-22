@@ -15,6 +15,9 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
       <p class="mb-6 text-lg text-slate-600 dark:text-slate-400">
         Reflexiones y guías prácticas sobre desarrollo web, arquitectura de productos e integraciones con IA.
       </p>
+      <p class="mb-6 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400">
+        Este blog es asistido por un asistente de IA privado. Las ideas, estrategia y revisión final son humanas; las llamadas al modelo se enrutan a través de una función serverless segura, sin exponer API keys en el frontend.
+      </p>
       <Search client:only="react" />
     </div>
 
