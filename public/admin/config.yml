@@ -2,39 +2,39 @@ backend:
   name: git-gateway
   branch: main
 
-# Descomenta y actualiza cuando tengas dominio real
-# site_url: https://site-jhonnathan.netlify.app
-# logo_url: https://site-jhonnathan.netlify.app/favicon.svg
-
-publish_mode: editorial_workflow
-
-media_folder: "public/assets/blog"
-public_folder: "/assets/blog"
+media_folder: public/uploads
+public_folder: /uploads
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "src/content/blog"
+  - name: blog
+    label: Blog
+    folder: src/content/blog
     create: true
     slug: "{{slug}}"
-    preview_path: "blog/{{slug}}"
-    editor:
-      preview: true
     fields:
-      - { label: "Título", name: "title", widget: "string", hint: "Máx. 120 caracteres." }
-      - { label: "Descripción", name: "description", widget: "text", hint: "Máx. 240 caracteres. Aparece en tarjetas y SEO." }
-      - { label: "Fecha de publicación", name: "pubDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, default: "{{now}}" }
-      - { label: "Última actualización", name: "updatedDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false }
-      - { label: "Autor", name: "author", widget: "string", default: "Jhonnathan" }
-      - { label: "Etiquetas", name: "tags", widget: "list", allow_add: true, default: [] }
-      - { label: "Categoría", name: "category", widget: "string", required: false }
-      - { label: "Destacado", name: "featured", widget: "boolean", default: false }
-      - { label: "Borrador", name: "draft", widget: "boolean", default: false }
-      - label: "Portada"
-        name: "cover"
-        widget: "object"
-        required: false
-        fields:
-          - { label: "Imagen", name: "src", widget: "image" }
-          - { label: "Texto alternativo", name: "alt", widget: "string" }
-      - { label: "Cuerpo", name: "body", widget: "markdown" }
+      - { label: "Título", name: title, widget: string }
+      - { label: "Fecha", name: date, widget: datetime }
+      - { label: "Descripción", name: description, widget: string }
+      - { label: "Imagen", name: image, widget: image, required: false }
+      - { label: "Cuerpo", name: body, widget: markdown }
+  - name: servicios
+    label: Servicios
+    folder: src/content/servicios
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: title, widget: string }
+      - { label: "Descripción", name: description, widget: string }
+      - { label: "Icono", name: icon, widget: string, required: false }
+      - { label: "Cuerpo", name: body, widget: markdown }
+  - name: portafolio
+    label: Portafolio
+    folder: src/content/portafolio
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: title, widget: string }
+      - { label: "Cliente", name: client, widget: string, required: false }
+      - { label: "URL", name: url, widget: string, required: false }
+      - { label: "Imagen", name: image, widget: image, required: false }
+      - { label: "Cuerpo", name: body, widget: markdown }
