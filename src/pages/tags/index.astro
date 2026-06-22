@@ -4,6 +4,8 @@ import { getAllTags } from "../../utils/tags";
 import Tag from "../../components/ui/Tag.astro";
 import ContentHeader from "../../components/content/ContentHeader.astro";
 
+import { PAGES } from "../../config";
+
 const tags = await getAllTags();
 
 const maxCount = Math.max(...tags.map((t) => t.count));
@@ -21,11 +23,11 @@ function getTagSize(count: number): "sm" | "md" | "lg" {
 }
 ---
 
-<BaseLayout title="Tags">
+<BaseLayout title={PAGES.tags.title}>
     <div class="content-container">
         <ContentHeader
-            title="Tags"
-            meta={[{ value: `${tags.length} unique topics` }]}
+            title={PAGES.tags.title}
+            meta={[{ value: `${tags.length} temas` }]}
         />
 
         <div class="container-narrow pt-12">
