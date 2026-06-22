@@ -1,6 +1,5 @@
 ---
 import Tag from "./Tag.astro";
-import Icon from "./Icon.astro";
 
 interface Props {
     title: string;
@@ -8,60 +7,54 @@ interface Props {
     description?: string;
     date?: string;
     authors?: string;
-    extraInput?: string;
+    extra?: string;
     tags?: string[];
-    externalUrl?: string;
-    ctaText?: string;
+    linkText?: string;
 }
 
-const { title, href, description, date, authors, extraInput, tags, externalUrl, ctaText = "Ver más" } = Astro.props;
+const {
+    title,
+    href,
+    description,
+    date,
+    authors,
+    extra,
+    tags = [],
+    linkText = "Ver más",
+} = Astro.props;
 ---
 
-<article class="card">
-    <div class="card-content">
-        <a href={href} class="card-title">{title}</a>
+<article class="py-4 border-b border-dashed border-border last:border-b-0 transition-opacity hover:opacity-95">
+    <div class="flex flex-col gap-2">
+        <a href={href} class="text-lg lg:text-xl font-bold leading-tight text-foreground hover:text-accent hover:underline underline-offset-4">
+            {title}
+        </a>
 
-        <div class="card-meta">
-            {date && (
-                <span class="flex items-center gap-1.5">
-                    <Icon name="Calendar" size={16} />
-                    <span>{date}</span>
-                </span>
-            )}
-            {authors && (
-                <span class="flex items-center gap-1.5">
-                    <Icon name="User" size={16} />
-                    <span>{authors}</span>
-                </span>
-            )}
-            {extraInput && (
-                <span class="flex items-center gap-1.5">
-                    <Icon name="Institution" size={16} />
-                    <span>{extraInput}</span>
-                </span>
-            )}
+        <div class="flex flex-wrap items-center gap-3 text-xs lg:text-sm text-foreground/70"
+        >
+            {date && <span>{date}</span>}
+            {authors && <span>{authors}</span>}
+            {extra && <span>{extra}</span>}
         </div>
 
-        {
-            tags && tags.length > 0 && (
-                <div class="card-tags">
-                    {tags.map((tag) => (
-                        <Tag name={tag} size="sm" />
-                    ))}
-                </div>
-            )
-        }
-
-        {description && <p class="card-desc">{description}</p>}
-    </div>
-
-    {
-        externalUrl && (
-            <div class="card-action">
-                <a href={externalUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm">
-                    {ctaText}
-                </a>
+        {tags.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                    <Tag tag={tag} />
+                ))}
             </div>
-        )
-    }
+        )}
+
+        {description && (
+            <p class="text-sm lg:text-base text-foreground/80 leading-relaxed line-clamp-2 m-0">
+                {description}
+            </p>
+        )}
+
+        <div class="mt-2">
+            <a href={href} class="text-sm font-bold text-foreground hover:text-accent whitespace-nowrap">
+                {linkText}
+            </a>
+        </div>
+    </div>
 </article>

@@ -5,7 +5,7 @@ shortBio: "Gerente de TI, especialista en ciberseguridad, DevOps y docente. Más
 institution: "Fundación Sur Futuro · ITLA · INFOTEP"
 ---
 
-Soy **Gerente de TI** en [Fundación Sur Futuro](https://www.fsf.edu.do), docente en [ITLA](https://www.itla.edu.do) y facilitador en [INFOTEP](https://www.infotep.gob.do). Mi trabajo cruza la **gestión de infraestructura tecnológica**, la **ciberseguridad práctica**, el **monitoreo/DevOps** y la **formación de talento técnico**.
+Soy Gerente de TI en [Fundación Sur Futuro](https://www.fsf.edu.do), docente en [ITLA](https://www.itla.edu.do) y facilitador en [INFOTEP](https://www.infotep.gob.do). Mi trabajo cruza la **gestión de infraestructura tecnológica**, la **ciberseguridad práctica**, el **monitoreo/DevOps** y la **formación de talento técnico**.
 
 ## Trayectoria
 

@@ -1,20 +1,29 @@
 ---
 interface Props {
-    name: string;
+    tag?: string;
+    name?: string;
     count?: number;
     size?: "sm" | "md" | "lg";
 }
 
-const { name, count, size = "md" } = Astro.props;
+const { tag, name, count, size = "md" } = Astro.props;
+const label = tag || name;
 
 const sizeClasses = {
-    sm: "text-xs",
-    md: "text-sm",
-    lg: "text-base",
+    sm: "text-sm px-2 py-1",
+    md: "text-base px-3 py-1.5",
+    lg: "text-lg px-4 py-2",
 };
 ---
 
-<a href={`/tags/${name.toLowerCase()}`} class={`tag ${sizeClasses[size]}`}>
-    #{name}
-    {count !== undefined && <span class="opacity-60 ml-1">({count})</span>}
-</a>
+{label && (
+    <a
+        href={`/tags/${label.toLowerCase().replace(/\s+/g, "-")}`}
+        class={`inline-flex items-center gap-1.5 font-semibold text-accent hover:opacity-100 opacity-85 hover:underline underline-offset-4 transition-opacity border border-border rounded-md bg-surface hover:border-accent ${sizeClasses[size]}`}
+    >
+        <span>#{label}</span>
+        {count !== undefined && count > 0 && (
+            <span class="text-foreground/60 text-xs font-medium">({count})</span>
+        )}
+    </a>
+)}

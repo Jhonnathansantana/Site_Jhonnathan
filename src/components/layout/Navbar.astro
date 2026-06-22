@@ -4,96 +4,125 @@ import { NAV_LINKS, PAGES, SITE } from "../../config";
 const currentPath = Astro.url.pathname;
 const visibleLinks = NAV_LINKS.filter((link) => {
     const isHome = link.href === "/";
-    const pageKey = isHome ? "home" : link.href.split("/").filter(Boolean)[0];
-    const pageConfig = (PAGES as any)[pageKey];
-    return link.isActive !== false && pageConfig?.active !== false;
+    const pageKey = link.href.replace(/^\//, "").replace(/\/$/, "") || "home";
+    const pageConfig = PAGES[pageKey];
+    return isHome || (pageConfig && pageConfig.isActive);
 });
 ---
 
-<nav class="navbar" aria-label="Principal">
-    <div class="navbar-inner">
-        <a href="/" class="navbar-brand lg:hidden" aria-label="Inicio">
-            <span class="font-bold text-foreground">{SITE.title}</span>
+<nav
+    class="sticky top-0 z-20 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 px-4 py-3 lg:px-6 lg:py-4 border-b border-border bg-background"
+    aria-label="Principal"
+>
+    <div class="flex w-full lg:w-auto items-center justify-between">
+        <a href="/" class="lg:hidden font-bold text-foreground" aria-label="Inicio">
+            {SITE.author.name}
         </a>
         <button
             id="nav-toggle"
-            class="nav-toggle"
+            class="lg:hidden flex flex-col justify-center gap-1.5 w-10 h-10 p-2 border border-border rounded-md bg-transparent"
             aria-expanded="false"
             aria-controls="nav-menu"
             aria-label="Abrir menú"
         >
-            <span class="nav-toggle-bar" aria-hidden="true"></span>
-            <span class="nav-toggle-bar" aria-hidden="true"></span>
-            <span class="nav-toggle-bar" aria-hidden="true"></span>
+            <span class="block w-full h-0.5 bg-foreground transition-transform duration-300 origin-center nav-bar"></span>
+            <span class="block w-full h-0.5 bg-foreground transition-opacity duration-300 nav-bar"></span>
+            <span class="block w-full h-0.5 bg-foreground transition-transform duration-300 origin-center nav-bar"></span>
         </button>
     </div>
 
-    <ul id="nav-menu" class="nav-links" role="menubar">
-        {
-            visibleLinks.map((link) => (
-                <li role="none">
+    <ul
+        id="nav-menu"
+        class="hidden lg:flex flex-col lg:flex-row w-full lg:w-auto gap-0 lg:gap-6 list-none p-0 m-0"
+        role="menubar"
+    >
+        {visibleLinks.map((link) => {
+            const isActive =
+                currentPath === link.href ||
+                (link.href !== "/" && currentPath.startsWith(link.href));
+            return (
+                <li role="none" class="border-b border-border lg:border-none">
                     <a
                         href={link.href}
                         role="menuitem"
-                        class={`nav-link ${
-                            currentPath === link.href ||
-                            (link.href !== "/" && currentPath.startsWith(link.href))
-                                ? "active"
-                                : "inactive"
+                        class={`block lg:inline-block py-3 lg:py-1 text-base lg:text-sm font-semibold relative transition-colors ${
+                            isActive
+                                ? "text-accent"
+                                : "text-foreground/75 hover:text-accent"
                         }`}
-                        aria-current={
-                            currentPath === link.href ||
-                            (link.href !== "/" && currentPath.startsWith(link.href))
-                                ? "page"
-                                : undefined
-                        }
+                        aria-current={isActive ? "page" : undefined}
                     >
                         {link.label}
-                        <span class="nav-link-line" aria-hidden="true" />
+                        <span
+                            class={`hidden lg:block absolute -bottom-1 left-0 h-0.5 rounded bg-accent transition-all duration-300 ${
+                                isActive ? "w-full" : "w-0 group-hover:w-full"
+                            }`}
+                            aria-hidden="true"
+                        />
                     </a>
                 </li>
-            ))
-        }
+            );
+        })}
     </ul>
-</nav>
 
-<script is:inline>
-    (function () {
-        const toggle = document.getElementById("nav-toggle");
-        const menu = document.getElementById("nav-menu");
-        if (!toggle || !menu) return;
+    <script is:inline>
+        (function () {
+            const toggle = document.getElementById("nav-toggle");
+            const menu = document.getElementById("nav-menu");
+            if (!toggle || !menu) return;
 
-        function closeMenu() {
-            menu.classList.remove("open");
-            toggle.classList.remove("open");
-            toggle.setAttribute("aria-expanded", "false");
-            toggle.setAttribute("aria-label", "Abrir menú");
-            document.body.style.overflow = "";
-        }
-
-        function openMenu() {
-            menu.classList.add("open");
-            toggle.classList.add("open");
-            toggle.setAttribute("aria-expanded", "true");
-            toggle.setAttribute("aria-label", "Cerrar menú");
-            document.body.style.overflow = "hidden";
-        }
-
-        toggle.addEventListener("click", () => {
-            if (menu.classList.contains("open")) {
-                closeMenu();
-            } else {
-                openMenu();
+            function closeMenu() {
+                menu.classList.add("hidden");
+                menu.classList.remove("flex");
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.setAttribute("aria-label", "Abrir menú");
+                toggle.classList.remove("open");
+                document.body.style.overflow = "";
             }
-        });
 
-        menu.querySelectorAll(".nav-link").forEach((link) => {
-            link.addEventListener("click", closeMenu);
-        });
+            function openMenu() {
+                menu.classList.remove("hidden");
+                menu.classList.add("flex");
+                toggle.setAttribute("aria-expanded", "true");
+                toggle.setAttribute("aria-label", "Cerrar menú");
+                toggle.classList.add("open");
+                document.body.style.overflow = "hidden";
+            }
 
-        document.addEventListener("astro:after-swap", closeMenu);
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") closeMenu();
-        });
-    })();
-</script>
+            toggle.addEventListener("click", () => {
+                if (toggle.classList.contains("open")) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            menu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            document.addEventListener("astro:after-swap", closeMenu);
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") closeMenu();
+            });
+        })();
+    </script>
+
+
+<style is:global>
+    #nav-toggle.open .nav-bar:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+    #nav-toggle.open .nav-bar:nth-child(2) {
+        opacity: 0;
+    }
+    #nav-toggle.open .nav-bar:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+    @media (min-width: 1024px) {
+        #nav-menu {
+            display: flex !important;
+        }
+    }
+</style>
+</nav>

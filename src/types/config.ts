@@ -1,6 +1,6 @@
 export interface SiteConfig {
     website: string;
-    author: string;
+    author: { name: string; avatar: string };
     desc: string;
     title: string;
     ogImage: string;

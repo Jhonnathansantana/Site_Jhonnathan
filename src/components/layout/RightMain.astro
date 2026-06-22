@@ -1,12 +1,6 @@
 ---
-import Navbar from "./Navbar.astro";
-import Footer from "./Footer.astro";
 ---
 
-<div class="main-content">
-    <Navbar />
-    <div class="main-body animate-in">
-        <slot />
-    </div>
-    <Footer />
+<div class="flex-1 min-w-0 flex flex-col">
+    <slot />
 </div>

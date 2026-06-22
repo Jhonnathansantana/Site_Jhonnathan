@@ -2,10 +2,13 @@ import type { SiteConfig, ThemeConfig, SettingsConfig, UmamiAnalyticsConfig, Ana
 
 export const SITE: SiteConfig = {
     website: "https://site-jhonnathan.netlify.app/",
-    author: "Jhonnathan De Jesús Araujo Santana",
+    author: {
+        name: "Jhonnathan De Jesús Araujo Santana",
+        avatar: "/jhonnathan.jpg",
+    },
     desc: "Portafolio académico y profesional de Jhonnathan De Jesús Araujo Santana. TI, ciberseguridad, DevOps y docencia.",
     title: "Jhonnathan De Jesús Araujo Santana",
-    ogImage: "jhonnathan.jpg",
+    ogImage: "/jhonnathan.jpg",
     postPerPage: 5,
     favicon: "/favicon.svg",
     lang: "es",

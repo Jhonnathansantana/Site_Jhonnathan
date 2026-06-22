@@ -1,11 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { Content as BioContent } from "../content/bio.md";
 import { PAGES } from "../config";
 import Icon from "../components/ui/Icon.astro";
-
-const bioCollection = await getCollection("bio");
-const BioContent = bioCollection[0]?.rendered?.Content;
 
 const quickLinks = [
     { label: "Servicios", href: "/services", icon: "Briefcase" },
@@ -17,7 +15,7 @@ const quickLinks = [
 
 <BaseLayout title={PAGES.home.title}>
     <div class="prose max-w-none">
-        {BioContent ? <BioContent /> : <p>Cargando biografía...</p>}
+        <BioContent />
     </div>
 
     <section class="mt-8" aria-labelledby="quick-links-title">

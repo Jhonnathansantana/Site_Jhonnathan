@@ -2,51 +2,55 @@
 import { SITE, SOCIALS, SOCIAL_ICONS } from "../../config";
 import { getCollection } from "astro:content";
 import Icon from "../ui/Icon.astro";
-import { Image } from 'astro:assets';
 
-const activeSocials = SOCIALS.filter((s) => s.isActive);
 const bioCollection = await getCollection("bio");
 const bio = bioCollection[0]?.data;
 ---
 
-<aside class="sidebar" aria-label="Perfil del autor">
-    <div class="sidebar-profile">
-        {bio?.avatar && (
-            <a href="/" aria-label="Ir al inicio" class="sidebar-avatar-link">
-                <Image
-                    src={`/${bio.avatar}`}
-                    alt={`Avatar de ${bio.name}`}
-                    width={160}
-                    height={160}
-                    densities={[1.5, 2]}
-                    format="webp"
-                    class="sidebar-avatar"
-                    loading="eager"
-                />
-            </a>
-        )}
-        <div class="sidebar-text">
-            {bio?.name && <h1 class="sidebar-name">{bio.name}</h1>}
+<aside
+    class="w-full lg:w-[280px] lg:h-screen lg:sticky lg:top-0 flex flex-col lg:flex-col lg:items-center px-4 py-4 lg:px-6 lg:py-10 gap-4 lg:gap-6 border-b lg:border-b-0 lg:border-r border-border bg-background"
+    aria-label="Perfil del autor"
+>
+    <div class="flex flex-row lg:flex-col items-center lg:text-center gap-3 lg:gap-5 w-full max-w-md mx-auto">
+        <a href="/" aria-label="Ir al inicio" class="leading-none rounded-full transition-transform hover:scale-[1.03]">
+            <img
+                src={SITE.author.avatar}
+                alt={`Avatar de ${SITE.author.name}`}
+                width="160"
+                height="160"
+                loading="eager"
+                decoding="async"
+                class="w-16 h-16 sm:w-20 sm:h-20 lg:w-36 lg:h-36 rounded-full object-cover border-2 border-border transition-colors hover:border-accent"
+            />
+        </a>
+
+        <div class="flex flex-col items-start lg:items-center gap-1 lg:gap-2 min-w-0">
+            {bio?.name && <h1 class="text-lg sm:text-xl lg:text-2xl font-extrabold leading-tight text-foreground">{bio.name}</h1>}
             {bio?.institution && (
-                <p class="sidebar-info">
-                    <Icon name="Institution" size={20} />
+                <p class="text-xs sm:text-sm text-foreground/70 flex items-center gap-1">
+                    <Icon name="Institution" size={16} />
                     <span>{bio.institution}</span>
                 </p>
             )}
             {bio?.shortBio && (
-                <p class="sidebar-bio">{bio.shortBio}</p>
+                <p class="hidden lg:block text-sm text-foreground/80 leading-relaxed">
+                    {bio.shortBio}
+                </p>
             )}
-            <div class="sidebar-socials">
-                {activeSocials.map((social) => (
+            <div class="flex gap-2 mt-1">
+                {SOCIALS.map((social) => (
                     <a
-                        href={social.href}
-                        aria-label={social.linkTitle}
-                        title={social.linkTitle}
+                        href={social.url}
+                        aria-label={`${social.label} de ${SITE.author.name}`}
+                        title={`${social.label} de ${SITE.author.name}`}
                         target="_blank"
                         rel="noreferrer"
-                        class="social-link"
+                        class="opacity-75 hover:opacity-100 hover:text-accent transition-all"
                     >
-                        <Icon name={SOCIAL_ICONS[social.name] || social.name} size={22} />
+                        <Icon
+                            name={SOCIAL_ICONS[social.name] || social.name}
+                            size={22}
+                        />
                     </a>
                 ))}
             </div>
