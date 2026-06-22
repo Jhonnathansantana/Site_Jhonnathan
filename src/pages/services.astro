@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseItemCard from "../components/ui/BaseItemCard.astro";
+import services from "../data/services.json";
+import { PAGES } from "../config";
+
+const { title, subtitle } = PAGES.services;
+---
+
+<BaseLayout title={title}>
+    <header class="page-header">
+        {title && <h1 class="page-title">{title}</h1>}
+        {subtitle && <p class="page-subtitle">{subtitle}</p>}
+    </header>
+
+    <section class="item-list">
+        {services.map((service) => (
+            <BaseItemCard
+                title={service.title}
+                description={service.description}
+                tags={service.tags}
+                href="mailto:jhonnathan@example.com"
+            />
+        ))}
+    </section>
+</BaseLayout>

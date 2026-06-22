@@ -26,6 +26,11 @@ export const PAGES: PagesConfig = {
         subtitle: "Experimentos, repositorios y desarrollo asistido por IA.",
         isActive: true,
     },
+    services: {
+        title: "Servicios",
+        subtitle: "Consultoría y acompañamiento en TI, ciberseguridad, DevOps, docencia e IA productiva.",
+        isActive: true,
+    },
     teaching: {
         title: "Docencia",
         subtitle: "Cursos, talleres y materiales educativos.",

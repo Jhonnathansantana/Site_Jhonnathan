@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Gestión de TI",
+    "description": "Diseño y liderazgo de infraestructura tecnológica, soporte, seguridad y alineación de TI con objetivos de negocio.",
+    "tags": ["infraestructura", "seguridad", "soporte"]
+  },
+  {
+    "title": "Ciberseguridad práctica",
+    "description": "Evaluación de riesgos, hardening, políticas de acceso, concienciación y controles proportionales para organizaciones dominicanas.",
+    "tags": ["zero trust", "hardening", "gestión de riesgos"]
+  },
+  {
+    "title": "DevOps y automatización",
+    "description": "Pipelines de CI/CD, despliegue continuo, monitoreo y funciones serverless con herramientas modernas como Netlify y GitHub Actions.",
+    "tags": ["devops", "netlify", "github actions"]
+  },
+  {
+    "title": "Docencia y formación técnica",
+    "description": "Diseño de cursos y talleres en redes, ciberseguridad, gestión de TI y productividad con IA para instituciones educativas.",
+    "tags": ["docencia", "itla", "infotep"]
+  },
+  {
+    "title": "Asesoría en IA productiva",
+    "description": "Acompañamiento para integrar asistentes de IA de forma segura y productiva en flujos de trabajo, educación y desarrollo.",
+    "tags": ["ia", "productividad", "automatización"]
+  }
+]
